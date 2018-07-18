@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @MovieDemo.Util.Constants.APP_NAME</title>
+    <title>@ViewBag.Title - @MovieDemo.Util.AppValues.APP_NAME</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -22,8 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Styles.Render("~/Content/css")</li>
+                    <li>@Scripts.Render("~/bundles/modernizr")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,12 +33,12 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - @MovieDemo.Util.Constants.APP_NAME</p>
+            <p>&copy; @DateTime.Now.Year - @MovieDemo.Util.AppValues.APP_NAME</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Html.ActionLink("Home", "Index", "Home")
 </body>
 </html>

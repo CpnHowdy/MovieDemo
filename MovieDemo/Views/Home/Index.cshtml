@@ -7,6 +7,11 @@
 
 <div class="row">
 
+    @using (Html.BeginForm("QueryImdbId", "Movie", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.TextBox("imdbId");
+    }
+
     @*Display login (if not logged in)*@
     @if (!Request.IsAuthenticated)
     {
