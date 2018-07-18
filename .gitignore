@@ -3,3 +3,5 @@ packages
 bin
 obj
 *.user
+/MovieDemo/App_Data/*.ldf
+/MovieDemo/App_Data/*.mdf
