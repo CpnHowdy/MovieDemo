@@ -2,6 +2,7 @@
 :root {
     --main-bg-color: #222;
     --main-text-color: rgb(252, 254, 251);
+    --minor-text-color: rgb(187, 182, 182);
     --alt-text-color: rgb(6,5,3);
 }
 
@@ -27,6 +28,14 @@ body {
     padding-bottom: 20px;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
+}
+
+body input {
+    color: var(--alt-text-color);
+}
+
+.text-info {
+    color: var(--minor-text-color)
 }
 
 /* Set padding to keep content from hitting the edges */

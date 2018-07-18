@@ -7,11 +7,6 @@
 
 <div class="row">
 
-    @*@using (Html.BeginForm("QueryImdbId", "Movie", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.TextBox("imdbId");
-    }*@
-
     @*<img src="~/Content/images/marquee.png" class="marquee" />*@
     <div class="marqueeSection">
         <div class="marqueeContent darkText">
@@ -26,6 +21,14 @@
             }
         </div>
     </div>
+
+    @*Search bar*@
+    @using (Html.BeginForm("QueryImdbId", "Movie", null, FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.TextBox("imdbId", null, new { @class = "" });
+        @Html.TextBox("movieId");
+        <input type="submit" style="display:none" />
+    }
 </div>
 
 @*<div class="row">

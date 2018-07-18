@@ -1,4 +1,5 @@
 ﻿using MovieDemo.Interfaces;
+using MovieDemo.Models;
 using MovieDemo.Services;
 using System;
 using System.Collections.Generic;
@@ -41,15 +42,33 @@ namespace MovieDemo.Controllers
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult QueryImdbId(string imdbId)
-        {
-            var dataFound = _omdb.QueryTitle(imdbId);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public ActionResult QueryImdbId(string imdbId)
+        //{
+        //    var dataFound = _omdb.QueryImdbId(imdbId);
 
-            var toReturn = new JsonResult();
-            toReturn.Data = dataFound;
-            return toReturn;
+        //    var toReturn = new JsonResult
+        //    {
+        //        Data = dataFound
+        //    };
+        //    return toReturn;
+        //}
+
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="movieId"></param>
+        /// <param name="imdbId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult QueryImdbId(int? movieId, string imdbId)
+        {
+            var movieFound = _omdb.QueryImdbId(imdbId);
+            var viewModel = new OmdbMovieViewModel(movieFound);
+            
+            return View(viewModel);
         }
     }
 }

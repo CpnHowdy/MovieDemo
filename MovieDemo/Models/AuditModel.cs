@@ -19,5 +19,8 @@ namespace MovieDemo.Models
         [StringLength(128)]
         public string UpdatedUser { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; }
     }
 }

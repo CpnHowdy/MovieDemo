@@ -1,0 +1,38 @@
+﻿@using MovieDemo.Util
+@model MovieDemo.Models.OmdbMovieViewModel
+@{
+    ViewBag.Title = $"{Model.Title} - {AppValues.APP_NAME}";
+    var hasImdb = !string.IsNullOrEmpty(Model.ImdbID);
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="@Model.Poster" class="img-responsive" />
+        </div>
+        <div class="col-sm-8">
+            <div style="display: inline;">
+                <h2>
+                    @Model.Title
+                </h2>
+                @if (hasImdb)
+                {
+                    <a target="_blank"
+                       href="@System.Web.Configuration.WebConfigurationManager.AppSettings[Config.IMDB_TITLE_URL]@Model.ImdbID">
+                        <img src="~/Content/images/imdbLink.png" class="img-responsive" />
+                    </a>
+                }
+            </div>
+            <hr />
+            <p class="text-info">@Html.DisplayFor(model => model.Plot)</p>
+        </div>
+    </div>
+</div>
+
+<p class="text-info">
+    
+</p>
+
+@section Scripts {
+ 1   @Scripts.Render("~/bundles/jqueryval")
+}

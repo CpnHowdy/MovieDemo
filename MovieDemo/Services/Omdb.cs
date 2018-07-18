@@ -6,6 +6,8 @@ using System.Configuration;
 using System.Web.Configuration;
 using MovieDemo.Util;
 using System.Net.Http;
+using System.Web.Script.Serialization;
+using MovieDemo.Models;
 
 namespace MovieDemo.Services
 {
@@ -67,14 +69,16 @@ namespace MovieDemo.Services
             }
         }
 
-        public object QueryTitle(string title)
+        public OmdbMovie QueryImdbId(string title)
         {
             var url = $"{BaseQuery}&i={title}";
             var client = new HttpClient();
 
             var response = client.GetAsync(url).Result;
             var data = response.Content.ReadAsStringAsync().Result;
-            return data;
+            var toReturn = new JavaScriptSerializer().Deserialize<OmdbMovie>(data);
+
+            return toReturn;
         }
     }
 }

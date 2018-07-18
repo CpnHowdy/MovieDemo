@@ -15,5 +15,6 @@ namespace MovieDemo.Util
     {
         public static readonly string OMDB_API_KEY = "OmdbApiKey";
         public static readonly string OMDB_BASE_URL = "OmdbBaseUrl";
+        public static readonly string IMDB_TITLE_URL = "ImdbTitleUrl";
     }
 }
