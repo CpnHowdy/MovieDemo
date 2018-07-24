@@ -1,0 +1,18 @@
+﻿@using MovieDemo.Util
+@model MovieDemo.Models.MovieSearchViewModel
+@{
+    ViewBag.Title = $"{AppValues.APP_NAME} - Search Results";
+    //var hasImdb = !string.IsNullOrEmpty(Model.ImdbID);
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @Model.ToString()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+ 1   @Scripts.Render("~/bundles/jqueryval")
+}

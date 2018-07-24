@@ -1,5 +1,5 @@
 ﻿@using MovieDemo.Util
-@model MovieDemo.Models.OmdbMovieViewModel
+@model MovieDemo.Models.MovieDetailsViewModel
 @{
     ViewBag.Title = $"{Model.Title} - {AppValues.APP_NAME}";
     var hasImdb = !string.IsNullOrEmpty(Model.ImdbID);

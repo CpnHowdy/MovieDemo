@@ -12,15 +12,18 @@ namespace MovieDemo.Controllers
     public class MovieController : Controller
     {
         private readonly IOmdb _omdb;
+        private readonly ITmdb _tmdb;
 
-        public MovieController(IOmdb omdb)
+        public MovieController(IOmdb omdb, ITmdb tmdb)
         {
             _omdb = omdb;
+            _tmdb = tmdb;
         }
 
         public MovieController()
         {
             _omdb = new Omdb();
+            _tmdb = new Tmdb();
         }
 
         public ActionResult Index()
@@ -66,8 +69,24 @@ namespace MovieDemo.Controllers
         public ActionResult QueryImdbId(int? movieId, string imdbId)
         {
             var movieFound = _omdb.QueryImdbId(imdbId);
-            var viewModel = new OmdbMovieViewModel(movieFound);
+            var viewModel = new MovieDetailsViewModel(movieFound);
             
+            return View(viewModel);
+        }
+
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="movieId"></param>
+        /// <param name="imdbId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Search(string q)
+        {
+            var movieFound = _tmdb.Search(q);
+            var viewModel = new MovieSearchViewModel(movieFound);
+
             return View(viewModel);
         }
     }

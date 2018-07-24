@@ -6,7 +6,7 @@ namespace MovieDemo.Models
     /// <summary>
     ///     Model for movies
     /// </summary>
-    public class OmdbMovieViewModel
+    public class MovieDetailsViewModel
     {
         [DisplayName("Title")]
         public string Title { get; set; }
@@ -57,8 +57,8 @@ namespace MovieDemo.Models
         [DisplayName("Rotten Tomatoes Score")]
         public string RTRating { get; set; }
 
-        public OmdbMovieViewModel() { }
-        public OmdbMovieViewModel(OmdbMovie toConvert)
+        public MovieDetailsViewModel() { }
+        public MovieDetailsViewModel(OmdbMovie toConvert)
         {
             Title = toConvert.Title;
             Year = toConvert.Year;
