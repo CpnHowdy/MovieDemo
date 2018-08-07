@@ -91,12 +91,14 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\TmdbTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Services\testResults.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieDemo\MovieDemo.csproj">

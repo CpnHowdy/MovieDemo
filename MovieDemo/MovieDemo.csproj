@@ -220,6 +220,7 @@
     <Compile Include="Models\AuditModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MovieSearchViewModel.cs" />
+    <Compile Include="Models\TmdbMovieViewModel.cs" />
     <Compile Include="Models\TmdbMovieJson.cs" />
     <Compile Include="Models\MovieDetailsViewModel.cs" />
     <Compile Include="Models\OmdbMovie.cs" />

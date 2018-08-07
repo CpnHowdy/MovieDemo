@@ -10,14 +10,19 @@ namespace MovieDemo.Models
     {
         public MovieSearchViewModel(TmdbQueryResultsJson apiModel)
         {
-            Results = apiModel.Results ?? new List<TmdbMovieJson>();
+            // Add individual results
+            Results = new List<TmdbMovieViewModel>();
+            if(apiModel.Results != null)
+                foreach(var mov in apiModel.Results)
+                    Results.Add(new TmdbMovieViewModel(mov));
+
             Page = apiModel.Page;
-            TotalResults = apiModel.TotalResults;
-            TotalPages = apiModel.TotalPages;
+            TotalResults = 0; //apiModel.TotalResults.Value;
+            TotalPages = apiModel.Total_Pages;
             SearchSuccess = true; // todo: set to true/false based on success of request
         }
         public bool SearchSuccess { get; set; }
-        public List<TmdbMovieJson> Results { get; set; }
+        public List<TmdbMovieViewModel> Results { get; set; }
         public int Page { get; set; }
         public int TotalResults { get; set; }
         public int TotalPages { get; set; }

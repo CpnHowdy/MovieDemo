@@ -118,7 +118,12 @@ namespace MovieDemo.Services
 
             // Parse response and return
             var data = response.Content.ReadAsStringAsync().Result;
-            var toReturn = new JavaScriptSerializer().Deserialize<TmdbQueryResultsJson>(data);
+            return ParseTmdbJson(data);
+        }
+
+        public TmdbQueryResultsJson ParseTmdbJson(string json)
+        {
+            var toReturn = new JavaScriptSerializer().Deserialize<TmdbQueryResultsJson>(json);
             return toReturn;
         }
     }

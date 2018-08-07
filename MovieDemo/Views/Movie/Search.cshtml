@@ -6,13 +6,16 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            @Model.ToString()
+    @foreach (var mov in Model.Results)
+    {
+        <div class="row">
+            <div class="col-12">
+                @Html.ActionLink(mov.Title, "Detail", "Movie", new { id = mov.Id }, new { @class = "main-link" })
+            </div>
         </div>
-    </div>
+    }
 </div>
 
 @section Scripts {
- 1   @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }
