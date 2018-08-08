@@ -87,6 +87,19 @@ namespace MovieDemo.Services
         }
 
         /// <summary>
+        ///     Combines url & key into a url for querying by id
+        /// </summary>
+        public string BuildDetailsUrl(string queryString, int id)
+        {
+            var baseUrl = ConfigFetcher.Fetch(Config.TMDB_BASE_URL);
+            var version = ConfigFetcher.Fetch(Config.TMDB_VERSION);
+            var detailsUrl = ConfigFetcher.Fetch(Config.TMDB_MOVIE_DETAILS_URL);
+
+            var toReturn = $"{baseUrl}/{version}/{detailsUrl}/{id}?{queryString}";
+            return toReturn;
+        }
+
+        /// <summary>
         ///     Perform a general search against the TMDB API and return the first page of results
         /// </summary>
         /// <param name="query"></param>
@@ -94,17 +107,14 @@ namespace MovieDemo.Services
         public TmdbQueryResultsJson Search(string query)
         {
             // Build query string
-            var queryParams = new Dictionary<string, string>();
+            var queryParams = ApiKeyQuery;
             try
             {
                 queryParams.Add(
-                    ConfigFetcher.Fetch(Config.TMDB_MOVIE_SEARCH_PARAM), 
+                    ConfigFetcher.Fetch(Config.TMDB_MOVIE_SEARCH_PARAM),
                     query);
-                queryParams.Add(
-                    ConfigFetcher.Fetch(Config.TMDB_API_KEY), 
-                    ConfigFetcher.Fetch(Config.TMDB_API_KEY_VALUE));
             }
-            catch( KeyNotFoundException )
+            catch (KeyNotFoundException)
             {
                 // TODO: throw error to UI
                 return null;
@@ -118,13 +128,75 @@ namespace MovieDemo.Services
 
             // Parse response and return
             var data = response.Content.ReadAsStringAsync().Result;
-            return ParseTmdbJson(data);
+            return ParseTmdbQueryResultsJson(data);
         }
 
-        public TmdbQueryResultsJson ParseTmdbJson(string json)
+        /// <summary>
+        ///     Perform a general search against the TMDB API and return the first page of results
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TmdbMovieDetailsJson Details(int id, string posterSize)
+        {
+            // Build query string
+            var queryParams = ApiKeyQuery;
+            var queryString = QueryBuilder.BuildQuery(queryParams);
+
+            // Make request
+            var client = new HttpClient();
+            var searchUrl = BuildDetailsUrl(queryString, id);
+            var response = client.GetAsync(searchUrl).Result;
+
+            // Parse response and return
+            var data = response.Content.ReadAsStringAsync().Result;
+            var toReturn = ParseTmdbDetailsJson(data);
+            toReturn.Poster_path = 
+                $"{ConfigFetcher.Fetch(Config.TMDB_IMAGE_URL)}/{posterSize}/{toReturn.Poster_path}";
+            return toReturn;
+        }
+
+        /// <summary>
+        ///     Parses TMDB query results into json object
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public TmdbQueryResultsJson ParseTmdbQueryResultsJson(string json)
         {
             var toReturn = new JavaScriptSerializer().Deserialize<TmdbQueryResultsJson>(json);
             return toReturn;
+        }
+
+        /// <summary>
+        ///     Parses TMDB details json string into json object
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public TmdbMovieDetailsJson ParseTmdbDetailsJson(string json)
+        {
+            var toReturn = new JavaScriptSerializer().Deserialize<TmdbMovieDetailsJson>(json);
+            return toReturn;
+        }
+
+        /// <summary>
+        ///     Provides api key parameter, needed on most queries to TMDB API.
+        /// </summary>
+        private Dictionary<string, string> ApiKeyQuery {
+            get
+            {
+                var queryParams = new Dictionary<string, string>();
+                try
+                {
+                    queryParams.Add(
+                        ConfigFetcher.Fetch(Config.TMDB_API_KEY),
+                        ConfigFetcher.Fetch(Config.TMDB_API_KEY_VALUE));
+                }
+                catch (KeyNotFoundException)
+                {
+                    // TODO: throw error to UI
+                    return queryParams;
+                }
+                return queryParams;
+            }
         }
     }
 }

@@ -3,46 +3,71 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @MovieDemo.Util.AppValues.APP_NAME</title>
+    <title>@MovieDemo.Util.AppValues.APP_NAME - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    @*<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
 
 </head>
+
 <body>
-    <nav class="navbar navbar-light navbar-fixed-top container">
+    <div class="container">
         <div class="row">
-            <div class="col-12">
-                @Html.ActionLink("Movie Tracker", "Index", "Home", new { area = "" },
-                  new { @class = "navbar-brand impact main-text center" })
+            <div class="col-12 m-2">
+                <div class="border-outer bg-main container">
 
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="dark-blue-text"><i class="fa fa-bars fa-1x"></i></span>
-                </button>
+                    @*Header*@
+                    <div class="row border-bottom-thick">
 
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Styles.Render("~/Content/css")</li>
-                        <li>@Scripts.Render("~/bundles/modernizr")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
+                        @*Search*@
+                        @using (Html.BeginForm("Search", "Movie", null, FormMethod.Get, new { @class = "col-4 form-inline", role = "form" }))
+                        {
+                            <div class="form-group">
+                                <label class="col-1 col-form-label"
+                                       data-toggle="collapse" data-target="#searchTitle">
+                                    <i class="fa fa-search fa-lg"></i>
+                                </label>
+
+                                <div class="col-10 collapse" id="searchTitle">
+                                    @Html.TextBox("q", null,
+                                        new { @class = "form-control form-control-sm w-100",
+                                              placeholder = "Search" })
+                                </div>
+                            </div>
+                            <input type="submit" style="display:none" />
+                        }
+
+                        @*Title*@
+                        <span class="marquee-title arista col-4">
+                            @Html.ActionLink(MovieDemo.Util.AppValues.APP_NAME, "Index", "Home",
+                           null, new { @class = "main-text display-4" })
+                        </span>
+                    </div>
+
+
+                    @*Body*@
+                    @RenderBody()
+
+
+                    @*Footer*@
+                    <footer>
+                        <div class="container">
+                            <div class="row">
+                                <p class="col-12 text-center display-3 mb-0 arista">
+                                    23089
+                                </p>
+                                <p class="col-12 text-center times h6">
+                                    2018 &copy; - @MovieDemo.Util.AppValues.APP_NAME
+                                </p>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
         </div>
-    </nav>
-    <div class="container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - @MovieDemo.Util.AppValues.APP_NAME</p>
-        </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

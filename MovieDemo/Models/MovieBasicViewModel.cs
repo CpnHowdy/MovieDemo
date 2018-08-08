@@ -12,10 +12,10 @@ namespace MovieDemo.Models
     ///     Model for movie results coming out of TMDB API
     /// </summary>
     [NotMapped]
-    public class TmdbMovieViewModel
+    public class MovieBasicViewModel
     {
-        public TmdbMovieViewModel() { }
-        public TmdbMovieViewModel(TmdbMovieJson jsonObj)
+        public MovieBasicViewModel() { }
+        public MovieBasicViewModel(TmdbMovieBasicJson jsonObj)
         {
             VoteCount = jsonObj.Vote_Count;
             Id = jsonObj.Id;

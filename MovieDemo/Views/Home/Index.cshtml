@@ -1,77 +1,50 @@
 ﻿@using MovieDemo.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
+<div class="bg-main offset-lg-2 col-lg-8">
+    <div class="marqueeContent darkText highway-gothic px-0 py-1">
 
-
-<div class="row">
-
-    <div class="col-12 m-2">
-        <div class="marqueeContent darkText">
-            @*Display login (if not logged in)*@
-            @if (!Request.IsAuthenticated)
+        @*Display login (if not logged in)*@
+        @if (!Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
+                FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                <div class="">
-                    <section id="loginForm">
-                        @Html.Partial("_FullLoginPartial", Model)
-                    </section>
+                <hr />
+
+                //Log in
+                <div class="form-group row">
+                    <label class="display-4 col-12 text-center marquee-header">
+                        <a class="marquee-selected">LOG IN</a> / <a class="marquee-unselected">SIGN UP</a>
+                    </label>
                 </div>
+
+                <hr />
+
+                //Email
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
+                    <div class="col-md-8 col-lg-8 col-xl-8">
+                        @Html.TextBoxFor(m => m.Email,
+                            new { @class = "form-control box-office-input" })
+                    </div>
+                </div>
+
+                <hr />
+
+                //Password
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
+                    <div class="col-md-8 col-lg-8 col-xl-8">
+                        @Html.PasswordFor(m => m.Password,
+                            new { @class = "form-control box-office-input" })
+                    </div>
+                </div>
+                <hr />
             }
-        </div>
+        }
+
     </div>
 </div>
-
-@*Search bar*@
-@*<div class="row">
-    <div class="col-6 offset-3">
-        @using (Html.BeginForm("QueryImdbId", "Movie", null, FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
-        {
-            <div class="container">
-                <div class="row">
-                    @Html.TextBox("imdbId", null, new { @class = "col-6" })
-                    @Html.TextBox("movieId", null, new { @class = "col-6" })
-                    <input type="submit" style="display:none" />
-                </div>
-            </div>
-        }
-    </div>
-</div>*@
-
-@*TMDB Search Bar*@
-<div class="row">
-    @*Search bar*@
-    <div class="col-6 offset-3">
-        @using (Html.BeginForm("Search", "Movie", null, FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
-        {
-            <div class="container">
-                <div class="row">
-                    @Html.TextBox("q", null, new { @class = "col-12" })
-                    <input type="submit" style="display:none" />
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-@*<div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@

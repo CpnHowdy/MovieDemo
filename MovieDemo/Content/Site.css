@@ -1,9 +1,12 @@
-﻿/*Color/style variables*/
+﻿/*Variables*/
 :root {
     --main-bg-color: #222;
     --main-text-color: rgb(252, 254, 251);
     --minor-text-color: rgb(187, 182, 182);
     --alt-text-color: rgb(6,5,3);
+    --marquee-color: #fdffe8;
+    --marquee-header: #c71c1c;
+    --marquee-selected: #921111;
 }
 
 /*Fonts*/
@@ -22,48 +25,88 @@
     src: url('/Content/fonts/Great Attraction.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'Arista';
+    src: url('/Content/fonts/arista/Arista Light Trial.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Highway Gothic';
+    src: url('/Content/fonts/highwayGothic/HWYGOTH.TTF') format('truetype');
+}
+
+.impact {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.times {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.highway-gothic {
+    font-family: 'Highway Gothic';
+}
+
+.tw-cen-mt {
+    font-family: 'Tw Cen MT';
+}
+
+.great-attraction {
+    font-family: 'Great Attraction';
+}
+
+.showtime {
+    font-family: Showtime;
+}
+
+.rialto {
+    font-family: Rialto;
+    font-weight: 100 !important;
+}
+
+.rialto-lg {
+    font-family: Great Attraction;
+    vertical-align: super;
+    font-size: x-large;
+    padding-top: 0 !important;
+    font-weight: 100 !important;
+}
+
 /*Main Styling*/
+html {
+    margin: 0 auto;
+}
+
 body {
-    padding-top: 50px;
+    padding-top: 25px;
     padding-bottom: 20px;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
+    height: 100%;
+    min-width: 405px;
 }
 
 body input {
     color: var(--alt-text-color);
 }
 
+footer {
+    margin-top: 50px;
+}
+
 .navbar a {
     color: var(--main-text-color);
 }
 
-.row {
-    margin: 0;
-}
-
-.text-info {
+.minor-info {
     color: var(--minor-text-color)
 }
-
-/* Set padding to keep content from hitting the edges */
-/*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
     white-space: normal;
-}
-`
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
 }
 
 a.noticeable {
@@ -79,13 +122,26 @@ a.noticeable {
     text-align: center;
 }
 
-/*img.marquee {
-    height: 300px;
-    width: auto;
-}*/
+/*Marquee*/
+.border-inner {
+    border: 1px solid var(--marquee-color);
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.border-outer {
+    border-top: 8px solid var(--marquee-color);
+    border-left: 5px solid var(--marquee-color);
+    border-right: 5px solid var(--marquee-color);
+    border-bottom: 8px solid var(--marquee-color);
+    border-radius: 5px;
+}
+
+.border-bottom-thick {
+    border-bottom: 4px solid var(--marquee-color);
+}
 
 .marqueeSection {
-    /*background: url(/Content/images/marquee.png); todo: replace with proper styling*/ 
     background-repeat: no-repeat;
     background-size: 100%;
     height: 500px;
@@ -93,49 +149,70 @@ a.noticeable {
 
 .marqueeContent {
     top: 163px;
-    /*position: relative;*/
     background: white;
-    border-radius: 3px;
+    border-radius: 1px;
     padding: 10px;
+    margin: 4px;
+}
+
+.marqueeContent label {
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 36px;
+    line-height: 36px;
+}
+
+.marqueeContent hr {
+    background-color: black;
+    margin: 0;
+    border: none;
+    height: 1px;
+}
+
+.marqueeContent .form-group {
+    margin-bottom: 0;
+}
+
+.marqueeContent .form-control {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    font-family: 'Highway Gothic'
+}
+
+.marqueeContent .form-control:focus {
+    box-shadow: none;
+    border-color: inherit;
+}
+
+.marqueeContent .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.marquee-title {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.marquee-selected {
+    color: var(--marquee-selected) !important;
+}
+
+.marquee-unselected {
+    text-decoration: underline !important;
+    color: var(--marquee-header) !important;
+    cursor: pointer !important;
 }
 
 .darkText {
     color: var(--alt-text-color) !important;
 }
 
-.showtime-bg {
-    font-family: Showtime;
-    vertical-align: super;
-    font-size: large;
-}
-
-.rialto {
-    font-family: Great Attraction;
-    vertical-align: super;
-    font-size: medium;
-    padding-top: 0 !important;
-    font-weight: 100 !important;
-}
-
-.rialto-lg {
-    font-family: Great Attraction;
-    vertical-align: super;
-    font-size: x-large;
-    padding-top: 0 !important;
-    font-weight: 100 !important;
-}
-
 .margin-bottom-sm {
     margin-bottom: 6px !important;
-}
-
-.box-office-input {
-    border-radius: 0 !important;
-    border-color: black;
-}
-
-.impact {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 .alt-text {
@@ -148,4 +225,20 @@ a.noticeable {
 
 .main-link {
     color: var(--main-text-color) !important;
+}
+
+.inline-img {
+    vertical-align: baseline;
+}
+
+.border-dashed-1 {
+    border-image: url(images/border.png) 30% round;
+}
+
+.bg-main {
+    background-color: var(--main-bg-color);
+}
+
+.arista {
+    font-family: Arista;
 }

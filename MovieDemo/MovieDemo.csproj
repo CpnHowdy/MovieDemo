@@ -220,7 +220,7 @@
     <Compile Include="Models\AuditModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MovieSearchViewModel.cs" />
-    <Compile Include="Models\TmdbMovieViewModel.cs" />
+    <Compile Include="Models\MovieBasicViewModel.cs" />
     <Compile Include="Models\TmdbMovieJson.cs" />
     <Compile Include="Models\MovieDetailsViewModel.cs" />
     <Compile Include="Models\OmdbMovie.cs" />
@@ -241,8 +241,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\arista\Arista [z] by Zetafonts  .txt" />
+    <Content Include="Content\fonts\arista\arista.png" />
     <Content Include="Content\fonts\FSLA_NonCommercial_License.html" />
     <Content Include="Content\fonts\Showtime.txt" />
+    <Content Include="Content\images\border.png" />
     <Content Include="Content\images\imdbLink.png" />
     <Content Include="Content\images\marquee.png" />
     <Content Include="favicon.ico" />
@@ -275,6 +278,15 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\fonts\arista\Arista [z] Family %28CC BY-NC%29License.pdf" />
+    <Content Include="Content\fonts\arista\[z] Arista ExtraFilled Trial.ttf" />
+    <Content Include="Content\fonts\arista\Arista Light Trial.ttf" />
+    <Content Include="Content\fonts\arista\Arista Trial.ttf" />
+    <Content Include="Content\fonts\highwayGothic\HWYGCOND.TTF" />
+    <Content Include="Content\fonts\highwayGothic\HWYGEXPD.TTF" />
+    <Content Include="Content\fonts\highwayGothic\HWYGNRRW.TTF" />
+    <Content Include="Content\fonts\highwayGothic\HWYGOTH.TTF" />
+    <Content Include="Content\fonts\highwayGothic\HWYGWDE.TTF" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -342,6 +354,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Movie\Search.cshtml" />
+    <Content Include="Views\Movie\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,6 +6,11 @@ namespace MovieDemo.Interfaces
     {
         string ApiKey { get; }
         string BaseUrl { get; }
+
         TmdbQueryResultsJson Search(string query);
+        TmdbQueryResultsJson ParseTmdbQueryResultsJson(string json);
+
+        TmdbMovieDetailsJson Details(int id, string posterPath);
+        TmdbMovieDetailsJson ParseTmdbDetailsJson(string json);
     }
 }
