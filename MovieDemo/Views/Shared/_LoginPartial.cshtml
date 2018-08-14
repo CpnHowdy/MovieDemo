@@ -44,10 +44,15 @@
             @if (ViewData.ModelState.ContainsKey(Errors.BAD_LOGIN_KEY))
             {
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                <span>Issues accessing your account?</span> @Html.ActionLink("Reset Password", "ForgotPassword", "Account", new { @class = "" })
+                <span>Issues accessing your account?</span> @Html.ActionLink("Reset Password", "ForgotPassword", "Account", new { @class = "notice-link" })
             }
         </div>
     </div>
 
-    <input type="submit" class="d-none" />
+    // Submit button
+    <div class="form-group row">
+        <div class="col-12 text-center">
+            <input type="submit" value="LOG IN" class="btn btn-outline-secondary"/>
+        </div>
+    </div>
 }

@@ -47,6 +47,6 @@ namespace MovieDemo.Util
 
     public class Tmdb
     {
-        public enum IMAGE_SIZES { W154 };
+        public enum IMAGE_SIZES { W154, W92 };
     }
 }

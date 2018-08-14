@@ -1,16 +1,30 @@
 ﻿@using MovieDemo.Util
 @model MovieDemo.Models.MovieSearchViewModel
+
 @{
     ViewBag.Title = $"{AppValues.APP_NAME} - Search Results";
-    //var hasImdb = !string.IsNullOrEmpty(Model.ImdbID);
 }
 
 <div class="container">
     @foreach (var mov in Model.Results)
     {
-        <div class="row">
-            <div class="col-12">
-                @Html.ActionLink(mov.Title, "Detail", "Movie", new { id = mov.Id }, new { @class = "main-link" })
+        var detailUrl = Url.Action("Detail", "Movie", new { id = mov.Id });
+
+        <div class="row mb-2">
+            <div class="col-2">
+                <a href="@detailUrl">
+                    <img src="@Model.PosterPath@mov.PosterPath" class="img-responsive" />
+                </a>
+            </div>
+            <div class="col-8">
+                <a href="@detailUrl">
+                    <h5>@mov.Title</h5>
+                </a>
+            </div>
+            <div class="col-2 align-self-center">
+                <a href="@Url.Action("Detail", "Movie", new { id = mov.Id })" title="Add to Library">
+                    <i class="fa fa-2x fa-plus-circle add-movie"></i>
+                </a>
             </div>
         </div>
     }

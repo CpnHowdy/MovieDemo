@@ -23,84 +23,50 @@
 
             return false;
         });
+
+        $('#marquee-header').on("click", "a", function (e) {
+            var currClass = $(this).attr('class');
+            if (currClass.includes('marquee-selected'))
+                return false;
+
+            var toUpdate = $("#marquee-header a");
+            $.each(toUpdate, function (k, v) {
+                $(v).attr('class', 'marquee-unselected');
+            });
+
+            $(this).attr('class', 'marquee-selected');
+            return true;
+        });
     });
 </script>
 
-<div class="bg-main offset-lg-2 col-lg-8">
-    <div class="marqueeContent darkText highway-gothic px-0 py-1">
+<div class="marqueeContent darkText highway-gothic px-0 py-1">
 
-        @*Display login (if not logged in)*@
-        @if (!Request.IsAuthenticated)
-        {
-            <hr />
+    @*Display login (if not logged in)*@
+    @if (!Request.IsAuthenticated)
+    {
+        <hr />
 
-            //Log in
-            <div class="form-group row">
-                <label class="display-4 col-12 text-center marquee-header">
-                    <a class="marquee-selected">LOG IN</a> / <a class="marquee-unselected">SIGN UP</a>
-                </label>
-            </div>
+        //Log in
+        <div class="form-group row">
+            <label class="display-4 col-12 text-center marquee-header" id="marquee-header">
+                <a class="marquee-selected" href=".login-signup"
+                   data-toggle="collapse">LOG IN</a> 
+                / 
+                <a class="marquee-unselected" href=".login-signup"
+                   data-toggle="collapse">SIGN UP</a>
+            </label>
+        </div>
 
-            <div id="loginContainer" data-container="login">
-                @{Html.RenderPartial("_LoginPartial", Model.LoginViewModel);}
-            </div>
+        <div id="loginContainer" class="login-signup collapse show" data-container="login">
+            @{Html.RenderPartial("_LoginPartial", Model.LoginViewModel);}
+        </div>
 
-            @*using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
-                    FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    <hr />
+        <div id="signUpContainer" class="login-signup collapse" data-container="login">
+            @{Html.RenderPartial("_RegisterPartial", Model.RegisterViewModel);}
+        </div>
+    }
 
-                    //Email
-                    <div class="form-group row">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
-                        <div class="col-md-8 col-lg-8 col-xl-8">
-                            @Html.TextBoxFor(m => m.Email,
-                                new { @class = "form-control box-office-input" })
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    //Password
-                    <div class="form-group row">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
-                        <div class="col-md-8 col-lg-8 col-xl-8">
-                            @Html.PasswordFor(m => m.Password,
-                                new { @class = "form-control box-office-input" })
-                        </div>
-                    </div>
-                    <hr />
-                }*@
-
-            @*using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
-                    FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    <hr />
-
-                    //Email
-                    <div class="form-group row">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
-                        <div class="col-md-8 col-lg-8 col-xl-8">
-                            @Html.TextBoxFor(m => m.Email,
-                                new { @class = "form-control box-office-input" })
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    //Password
-                    <div class="form-group row">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-form-label col-md-4 col-lg-4 col-xl-4" })
-                        <div class="col-md-8 col-lg-8 col-xl-8">
-                            @Html.PasswordFor(m => m.Password,
-                                new { @class = "form-control box-office-input" })
-                        </div>
-                    </div>
-                    <hr />
-                }*@
-        }
-
-    </div>
 </div>
 
 @section Scripts {

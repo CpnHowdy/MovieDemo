@@ -355,6 +355,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Movie\Search.cshtml" />
     <Content Include="Views\Movie\Detail.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

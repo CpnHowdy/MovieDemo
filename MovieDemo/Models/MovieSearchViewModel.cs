@@ -24,6 +24,7 @@ namespace MovieDemo.Models
         public bool SearchSuccess { get; set; }
         public List<MovieBasicViewModel> Results { get; set; }
         public int Page { get; set; }
+        public string PosterPath { get; set; }
         public int TotalResults { get; set; }
         public int TotalPages { get; set; }
     }

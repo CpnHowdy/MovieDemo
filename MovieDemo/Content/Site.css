@@ -99,6 +99,14 @@ footer {
     margin-top: 50px;
 }
 
+a {
+    color: var(--main-text-color) !important;
+}
+
+.notice-link {
+    color: blue !important;
+}
+
 .navbar a {
     color: var(--main-text-color);
 }
@@ -200,10 +208,17 @@ a.noticeable {
 .marquee-selected {
     color: var(--marquee-selected) !important;
     font-weight: bold;
+    cursor: default !important;
+}
+
+.marquee-selected:hover {
+    color: var(--marquee-selected) !important;
+    font-weight: bold;
+    cursor: default !important;
+    text-decoration: none !important;
 }
 
 .marquee-unselected {
-    text-decoration: underline !important;
     color: var(--marquee-header) !important;
     cursor: pointer !important;
 }
@@ -265,3 +280,16 @@ a.noticeable {
 .text-danger {
     color: var(--marquee-header) !important;
 }
+
+.add-movie {
+    color: #2dbf2d;
+}
+
+/*.btn-outline-secondary {
+    color: var(--alt-text-color) !important;
+}
+
+.btn-outline-secondary:hover {
+    color: var(--main-text-color) !important;
+    background-color: var(--alt-text-color) !important;
+}*/

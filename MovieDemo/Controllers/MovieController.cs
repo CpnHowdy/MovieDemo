@@ -1,10 +1,7 @@
 ﻿using MovieDemo.Interfaces;
 using MovieDemo.Models;
 using MovieDemo.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MovieDemo.Util;
 using System.Web.Mvc;
 
 namespace MovieDemo.Controllers
@@ -13,6 +10,17 @@ namespace MovieDemo.Controllers
     {
         private readonly IOmdb _omdb;
         private readonly ITmdb _tmdb;
+
+        private ConfigFetcher _configFetcher { get; set; }
+        public ConfigFetcher ConfigFetcher
+        {
+            get
+            {
+                if (_configFetcher == null)
+                    _configFetcher = new ConfigFetcher();
+                return _configFetcher;
+            }
+        }
 
         public MovieController(IOmdb omdb, ITmdb tmdb)
         {
@@ -23,7 +31,7 @@ namespace MovieDemo.Controllers
         public MovieController()
         {
             _omdb = new Omdb();
-            _tmdb = new Tmdb();
+            _tmdb = new Services.Tmdb();
         }
 
         public ActionResult Index()
@@ -87,6 +95,9 @@ namespace MovieDemo.Controllers
             var movieFound = _tmdb.Search(q);
             var viewModel = new MovieSearchViewModel(movieFound);
 
+            // TODO: convert to ImageSizeFetcher
+            var posterSize = Util.Tmdb.IMAGE_SIZES.W92.ToString().ToLower();
+            viewModel.PosterPath = $"{ConfigFetcher.Fetch(Config.TMDB_IMAGE_URL)}/{posterSize}/";
             return View(viewModel);
         }
 

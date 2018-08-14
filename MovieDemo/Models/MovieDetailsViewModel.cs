@@ -20,12 +20,12 @@ namespace MovieDemo.Models
             Tagline = json.Tagline;
         }
 
-        public int Budget { get; set; }
+        public int? Budget { get; set; }
         public List<TmdbGenreJson> Genres { get; set; }
         public string ImdbId { get; set; }
         public List<TmdbCompanyJson> Production_Companies { get; set; }
-        public int Revenue { get; set; }
-        public int Runtime { get; set; }
+        public int? Revenue { get; set; }
+        public int? Runtime { get; set; }
         public string Status { get; set; }
         public string Tagline { get; set; }
     }
