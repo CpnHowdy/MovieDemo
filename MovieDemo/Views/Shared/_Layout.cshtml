@@ -6,6 +6,8 @@
     <title>@MovieDemo.Util.AppValues.APP_NAME - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -25,7 +27,7 @@
                         @using (Html.BeginForm("Search", "Movie", null, FormMethod.Get, new { @class = "col-4 form-inline", role = "form" }))
                         {
                             <div class="form-group">
-                                <label class="col-1 col-form-label"
+                                <label class="col-1 col-form-label pointer"
                                        data-toggle="collapse" data-target="#searchTitle">
                                     <i class="fa fa-search fa-lg"></i>
                                 </label>
@@ -36,7 +38,7 @@
                                               placeholder = "Search" })
                                 </div>
                             </div>
-                            <input type="submit" style="display:none" />
+                            <input type="submit" class="d-none" />
                         }
 
                         @*Title*@
@@ -56,9 +58,9 @@
                         <div class="container">
                             <div class="row">
                                 <p class="col-12 text-center display-3 mb-0 arista">
-                                    23089
+                                    53086
                                 </p>
-                                <p class="col-12 text-center times h6">
+                                <p class="col-12 text-center highway-gothic h6">
                                     2018 &copy; - @MovieDemo.Util.AppValues.APP_NAME
                                 </p>
                             </div>
@@ -68,8 +70,6 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

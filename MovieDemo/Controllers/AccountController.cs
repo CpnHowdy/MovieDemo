@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieDemo.Models;
+using MovieDemo.Util;
 
 namespace MovieDemo.Controllers
 {
@@ -70,6 +71,8 @@ namespace MovieDemo.Controllers
         {
             if (!ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(returnUrl))
+                    return Redirect(returnUrl);
                 return View(model);
             }
 
@@ -86,8 +89,46 @@ namespace MovieDemo.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("", "Incorrect email or password");
+                    //return RedirectToLocal(returnUrl);
+                    return View(returnUrl, model);
+            }
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginPart(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                //if (!string.IsNullOrEmpty(returnUrl))
+                //    return Redirect(returnUrl);
+                return View("_LoginPartial", model);
+            }
+            else
+            {
+                ModelState.Clear();
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError(Errors.BAD_LOGIN_KEY, "Invalid login.");
+                    //return RedirectToLocal(returnUrl);
+                    return View("_LoginPartial", model);
             }
         }
 

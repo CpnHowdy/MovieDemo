@@ -29,6 +29,11 @@ namespace MovieDemo.Util
         public static readonly string TMDB_VERSION = "TmdbVersion";
     }
 
+    public class Errors
+    {
+        public static readonly string BAD_LOGIN_KEY = "BadLogin";
+    }
+
     public class RouteValues
     {
         public static readonly string MOVIE_DETAIL = "detail";

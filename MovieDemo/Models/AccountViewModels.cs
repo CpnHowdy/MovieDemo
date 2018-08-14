@@ -46,14 +46,28 @@ namespace MovieDemo.Models
         public string Email { get; set; }
     }
 
+    /// <summary>
+    ///     Wrapper for views that offer login and sign up forms
+    /// </summary>
+    public class LoginSignUpViewModel
+    {
+        public LoginSignUpViewModel()
+        {
+            LoginViewModel = new LoginViewModel();
+            RegisterViewModel = new RegisterViewModel();
+        }
+        public LoginViewModel LoginViewModel { get; set; }
+        public RegisterViewModel RegisterViewModel { get; set; }
+    }
+
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [Display(Name = "EMAIL:")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Not a valid e-mail address.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [Display(Name = "PASSWORD:")]
         public string Password { get; set; }
