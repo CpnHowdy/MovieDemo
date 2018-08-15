@@ -103,6 +103,10 @@ a {
     color: var(--main-text-color) !important;
 }
 
+.btn-link {
+    color: var(--main-text-color) !important;
+}
+
 .notice-link {
     color: blue !important;
 }
@@ -271,7 +275,7 @@ a.noticeable {
     display: none;
 }
 
-#loginForm .validation-summary-errors ul {
+.marqueeContent .validation-summary-errors ul {
     list-style-type: none;
     margin: 0;
     padding: 0;

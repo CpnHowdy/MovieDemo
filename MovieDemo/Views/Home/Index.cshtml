@@ -24,6 +24,23 @@
             return false;
         });
 
+        $('#signUpContainer').on("submit", "form", function () {
+            var focusedId = document.activeElement.id;
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#signUpContainer').html(result);
+                    var found = $("#" + focusedId);
+                    if (found)
+                        found.focus();
+                }
+            });
+
+            return false;
+        });
+
         $('#marquee-header').on("click", "a", function (e) {
             var currClass = $(this).attr('class');
             if (currClass.includes('marquee-selected'))
@@ -42,17 +59,17 @@
 
 <div class="marqueeContent darkText highway-gothic px-0 py-1">
 
+    <hr />
+
     @*Display login (if not logged in)*@
     @if (!Request.IsAuthenticated)
     {
-        <hr />
-
         //Log in
         <div class="form-group row">
             <label class="display-4 col-12 text-center marquee-header" id="marquee-header">
                 <a class="marquee-selected" href=".login-signup"
-                   data-toggle="collapse">LOG IN</a> 
-                / 
+                   data-toggle="collapse">LOG IN</a>
+                /
                 <a class="marquee-unselected" href=".login-signup"
                    data-toggle="collapse">SIGN UP</a>
             </label>
@@ -65,6 +82,10 @@
         <div id="signUpContainer" class="login-signup collapse" data-container="login">
             @{Html.RenderPartial("_RegisterPartial", Model.RegisterViewModel);}
         </div>
+    }
+    else
+    {
+        Html.RenderPartial("_LoginSuccess", Model.LoginViewModel);
     }
 
 </div>

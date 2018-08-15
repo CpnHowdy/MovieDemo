@@ -213,9 +213,13 @@
     <Compile Include="Migrations\201807181914581_DeleteFlag.Designer.cs">
       <DependentUpon>201807181914581_DeleteFlag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808142248074_AddTmdbId.cs" />
+    <Compile Include="Migrations\201808142248074_AddTmdbId.Designer.cs">
+      <DependentUpon>201808142248074_AddTmdbId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\MovieDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AuditModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -356,6 +360,7 @@
     <Content Include="Views\Movie\Search.cshtml" />
     <Content Include="Views\Movie\Detail.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -371,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807181914581_DeleteFlag.resx">
       <DependentUpon>201807181914581_DeleteFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808142248074_AddTmdbId.resx">
+      <DependentUpon>201808142248074_AddTmdbId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

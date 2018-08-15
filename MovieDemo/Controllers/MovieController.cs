@@ -3,9 +3,13 @@ using MovieDemo.Models;
 using MovieDemo.Services;
 using MovieDemo.Util;
 using System.Web.Mvc;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace MovieDemo.Controllers
 {
+    [Authorize]
     public class MovieController : Controller
     {
         private readonly IOmdb _omdb;
@@ -19,6 +23,19 @@ namespace MovieDemo.Controllers
                 if (_configFetcher == null)
                     _configFetcher = new ConfigFetcher();
                 return _configFetcher;
+            }
+        }
+
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
             }
         }
 
@@ -53,35 +70,6 @@ namespace MovieDemo.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public ActionResult QueryImdbId(string imdbId)
-        //{
-        //    var dataFound = _omdb.QueryImdbId(imdbId);
-
-        //    var toReturn = new JsonResult
-        //    {
-        //        Data = dataFound
-        //    };
-        //    return toReturn;
-        //}
-
-        /// <summary>
-        ///     
-        /// </summary>
-        /// <param name="movieId"></param>
-        /// <param name="imdbId"></param>
-        /// <returns></returns>
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult QueryImdbId(int? movieId, string imdbId)
-        //{
-        //    var movieFound = _omdb.QueryImdbId(imdbId);
-        //    var viewModel = new MovieDetailsViewModel(movieFound);
-            
-        //    return View(viewModel);
-        //}
-
         /// <summary>
         ///     
         /// </summary>
@@ -115,6 +103,20 @@ namespace MovieDemo.Controllers
             var viewModel = new MovieDetailsViewModel(movieFound);
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t">TMDB ID of movie to be added</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddMovie(int t)
+        {
+            var userId = User.Identity.GetUserId();
+            _tmdb.AddMovie(t, userId);
+
+            return new JsonResult() {  };
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MovieDemo.Models
 {
@@ -13,6 +9,7 @@ namespace MovieDemo.Models
     {
         [Key]
         public int MovieId { get; set; }
+        public int TmdbId { get; set; }
         public string ImdbId { get; set; }
     }
 }

@@ -46,6 +46,18 @@
                             @Html.ActionLink(MovieDemo.Util.AppValues.APP_NAME, "Index", "Home",
                            null, new { @class = "main-text display-4" })
                         </span>
+
+                        @*User button*@
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", null, FormMethod.Post, new { @class = "offset-3 col-1 form-inline", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken();
+                                <button type="submit" class="btn btn-link align-middle pointer">
+                                    <i class="fa fa-user fa-lg"></i>
+                                </button>
+                            }
+                        }
                     </div>
 
 

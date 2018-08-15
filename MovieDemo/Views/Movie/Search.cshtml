@@ -11,20 +11,30 @@
         var detailUrl = Url.Action("Detail", "Movie", new { id = mov.Id });
 
         <div class="row mb-2">
+            @*Poster*@
             <div class="col-2">
                 <a href="@detailUrl">
                     <img src="@Model.PosterPath@mov.PosterPath" class="img-responsive" />
                 </a>
             </div>
+
+            @*Movie details*@
             <div class="col-8">
                 <a href="@detailUrl">
                     <h5>@mov.Title</h5>
                 </a>
             </div>
+
+            @*Add movie button*@
             <div class="col-2 align-self-center">
-                <a href="@Url.Action("Detail", "Movie", new { id = mov.Id })" title="Add to Library">
-                    <i class="fa fa-2x fa-plus-circle add-movie"></i>
-                </a>
+                @using (Html.BeginForm("AddMovie", "Movie", new { }, FormMethod.Post, new { @class = "", role = "form" }))
+                {
+                    @*@Html.HiddenFor(m => mov.Id, new { name = "t" })*@
+                    <input type="hidden" value="@mov.Id" name="t"/>
+                    <button type="submit" title="Add to Library">
+                        <i class="fa fa-2x fa-plus-circle add-movie"> </i>
+                    </button>
+                }
             </div>
         </div>
     }

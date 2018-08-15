@@ -1,4 +1,5 @@
 ﻿using MovieDemo.Models;
+using System;
 
 namespace MovieDemo.Interfaces
 {
@@ -12,5 +13,7 @@ namespace MovieDemo.Interfaces
 
         TmdbMovieDetailsJson Details(int id, string posterPath);
         TmdbMovieDetailsJson ParseTmdbDetailsJson(string json);
+
+        void AddMovie(int tmdbId, string userId);
     }
 }

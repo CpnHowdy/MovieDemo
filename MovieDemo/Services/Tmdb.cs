@@ -29,6 +29,17 @@ namespace MovieDemo.Services
             }
         }
 
+        private MovieDbContext _dbContext { get; set; }
+        public MovieDbContext DbContext
+        {
+            get
+            {
+                if (_dbContext == null)
+                    _dbContext = MovieDbContext.Create();
+                return _dbContext;
+            }
+        }
+
         /// <summary>
         ///     Gets API key from web config
         /// </summary>
@@ -175,6 +186,38 @@ namespace MovieDemo.Services
         {
             var toReturn = new JavaScriptSerializer().Deserialize<TmdbMovieDetailsJson>(json);
             return toReturn;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tmdbId"></param>
+        /// <param name="userId"></param>
+        public void AddMovie(int tmdbId, string userId)
+        {
+            // Do nothing if the record has already been deleted
+            var foundMovie = DbContext.Movies.FirstOrDefault(m => m.TmdbId == tmdbId);
+
+            // Create new movie if it doesn't exist
+            if (foundMovie == null)
+            {
+                foundMovie = DbContext.Movies.Create();
+                foundMovie.TmdbId = tmdbId;
+                foundMovie.IsDeleted = false;
+                DbContext.SaveChanges();
+            }
+
+            // Return if xref is found
+            var foundXref = DbContext.MovieUsers
+                .FirstOrDefault(x => x.MovieId == foundMovie.MovieId && x.UserId == userId);
+            if (foundXref != null && !foundXref.IsDeleted) return;
+
+            // Create/update xref and save
+            if (foundXref == null) foundXref = DbContext.MovieUsers.Create();
+            foundXref.MovieId = foundMovie.MovieId;
+            foundXref.UserId = userId;
+            foundXref.IsDeleted = false;
+            DbContext.SaveChanges();
         }
 
         /// <summary>
